@@ -188,5 +188,10 @@
     "multiformats@^12.1.3": "patch:multiformats@npm%3A12.1.3#./.yarn/patches/multiformats-npm-12.1.3-dbaa26037a.patch"
   },
   "private": true,
-  "packageManager": "yarn@3.5.0"
+  "packageManager": "yarn@3.5.0",
+  "expo": {
+    "autolinking": {
+      "nativeModulesDir": "./weshd"
+    }
+  }
 }
