@@ -72,7 +72,7 @@ export const HeaderMobile: FC<{
               toggleSidebar();
             } else {
               //@ts-ignore
-              navigation.openDrawer();
+              navigation.openDrawer && navigation.openDrawer();
             }
           }}
         >
