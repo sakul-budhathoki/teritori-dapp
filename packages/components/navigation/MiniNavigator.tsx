@@ -3,27 +3,37 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import React from "react";
 
 import { TabBarIcon } from "./components/TabBarIcon";
-import { HomeScreen } from "../../screens/Home/HomeScreen";
 import { MiniChatScreen } from "../../screens/Mini/Chat/MiniChatScreen";
 import { RootStackParamList } from "../../utils/navigation";
+import { neutral00, secondaryColor } from "../../utils/style/colors";
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 const Tab = createBottomTabNavigator();
-
-const screenTitle = (title: string) => "Teritori - " + title;
 
 const MainTab = () => {
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
+        tabBarActiveTintColor: secondaryColor,
         tabBarIcon: (props) => {
           return <TabBarIcon {...props} title={route.name} />;
         },
+        tabBarStyle: { backgroundColor: neutral00, borderTopWidth: 0 },
       })}
     >
       <Tab.Screen
         name="Chats"
-        options={{ header: () => null, title: screenTitle("Home") }}
+        options={{ header: () => null, title: "Chats" }}
+        component={MiniChatScreen}
+      />
+      <Tab.Screen
+        name="Feed"
+        options={{ header: () => null, title: "Feed" }}
+        component={MiniChatScreen}
+      />
+      <Tab.Screen
+        name="Wallets"
+        options={{ header: () => null, title: "Wallets" }}
         component={MiniChatScreen}
       />
     </Tab.Navigator>
@@ -36,7 +46,7 @@ export const MiniNavigator: React.FC = () => {
       <Stack.Screen
         name="Tabs"
         options={{ header: () => null }}
-        component={() => <MainTab />}
+        component={MainTab}
       />
     </Stack.Navigator>
   );

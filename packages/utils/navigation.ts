@@ -175,7 +175,7 @@ const navConfig: {
 
     // ==== Mini Chat
     Tabs: "tabs",
-    MiniChatScreen: "min-chat",
+    MiniChatScreen: "mini-chat",
   },
 };
 

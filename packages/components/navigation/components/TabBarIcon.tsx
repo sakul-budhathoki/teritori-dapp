@@ -1,13 +1,19 @@
 import React from "react";
-import { View } from "react-native";
+import { Switch, View } from "react-native";
 
-import addSVG from "../../../../assets/icons/add.svg";
+import feedSVG from "../../../../assets/icons/bottomTab/feed.svg";
+import walletSVG from "../../../../assets/icons/bottomTab/wallets.svg";
+import {
+  blueDefault,
+  neutral99,
+  secondaryColor,
+} from "../../../utils/style/colors";
 import { SVG } from "../../SVG";
 
 const icons = {
-  Chats: addSVG,
-  Feed: addSVG,
-  Wallets: addSVG,
+  Chats: "",
+  Feed: feedSVG,
+  Wallets: walletSVG,
 };
 
 interface TabBarIconProps {
@@ -17,7 +23,22 @@ interface TabBarIconProps {
   focused: boolean;
 }
 
-export const TabBarIcon = ({ color, title }: TabBarIconProps) => {
+export const TabBarIcon = ({
+  color,
+  title,
+  focused,
+  size,
+}: TabBarIconProps) => {
+  if (title === "Chats") {
+    return (
+      <Switch
+        trackColor={{ false: neutral99, true: blueDefault }}
+        thumbColor={!focused ? neutral99 : secondaryColor}
+        ios_backgroundColor={!focused ? blueDefault : neutral99}
+        value={focused}
+      />
+    );
+  }
   return (
     <View
       style={{
@@ -25,7 +46,12 @@ export const TabBarIcon = ({ color, title }: TabBarIconProps) => {
         justifyContent: "center",
       }}
     >
-      <SVG source={icons[title as keyof typeof icons]} height={10} width={10} />
+      <SVG
+        source={icons[title as keyof typeof icons]}
+        height={size}
+        width={size}
+        fill={color}
+      />
     </View>
   );
 };
