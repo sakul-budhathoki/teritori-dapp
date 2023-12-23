@@ -77,6 +77,10 @@ export type RootStackParamList = {
   Message: { view: string; tab?: string } | undefined;
   ChatSection: Conversation;
   FriendshipManager: { tab?: MessageFriendsTabItem } | undefined;
+
+  //Mini Screens
+  Tabs: undefined;
+  MiniChatScreen: undefined;
 };
 
 export type AppNavigationProp = NativeStackNavigationProp<RootStackParamList>;
@@ -168,6 +172,10 @@ const navConfig: {
     Message: "message/:view?",
     ChatSection: "message/chat",
     FriendshipManager: "/friends",
+
+    // ==== Mini Chat
+    Tabs: "tabs",
+    MiniChatScreen: "min-chat",
   },
 };
 

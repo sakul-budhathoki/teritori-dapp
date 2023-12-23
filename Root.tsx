@@ -22,6 +22,7 @@ import { Provider as ReduxProvider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 
 import { MultisigDeauth } from "./packages/components/multisig/MultisigDeauth";
+import { MiniNavigator } from "./packages/components/navigation/MiniNavigator";
 import { Navigator } from "./packages/components/navigation/Navigator";
 import { DropdownsContextProvider } from "./packages/context/DropdownsProvider";
 import { FeedbacksContextProvider } from "./packages/context/FeedbacksProvider";
@@ -108,7 +109,11 @@ export default function App() {
                                       <MessageContextProvider>
                                         <MediaPlayerContextProvider>
                                           <StatusBar style="inverted" />
-                                          <Navigator />
+                                          {process.env.isMini ? (
+                                            <MiniNavigator />
+                                          ) : (
+                                            <Navigator />
+                                          )}
                                         </MediaPlayerContextProvider>
                                       </MessageContextProvider>
                                     </MenuProvider>
