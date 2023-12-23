@@ -81,6 +81,7 @@ export type RootStackParamList = {
   //Mini Screens
   Tabs: undefined;
   MiniChatScreen: undefined;
+  MiniWalletScreen: undefined;
 };
 
 export type AppNavigationProp = NativeStackNavigationProp<RootStackParamList>;
@@ -176,6 +177,8 @@ const navConfig: {
     // ==== Mini Chat
     Tabs: "tabs",
     MiniChatScreen: "mini-chat",
+    // ==== Mini wallet
+    MiniWalletScreen: "mini-wallet",
   },
 };
 

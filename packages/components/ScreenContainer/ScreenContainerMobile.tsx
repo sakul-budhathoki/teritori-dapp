@@ -2,6 +2,7 @@ import React, { FC, ReactNode } from "react";
 import { Platform, ScrollView, useWindowDimensions, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
+import { HeaderMini } from "./HeaderMini";
 import { HeaderMobile } from "./HeaderMobile";
 import { useSearchBar } from "../../context/SearchBarProvider";
 import { NetworkFeature, NetworkInfo, NetworkKind } from "../../networks";
@@ -65,8 +66,6 @@ export const ScreenContainerMobile: FC<{
         flex: 1,
         width: "100%",
         backgroundColor: "#000000",
-        paddingTop: insets.top,
-        paddingBottom: insets.bottom,
       }}
     >
       <View
@@ -81,12 +80,17 @@ export const ScreenContainerMobile: FC<{
           onClose={() => setSearchModalMobileOpen(false)}
           visible={isSearchModalMobileOpen}
         />
-        <HeaderMobile
-          onBackPress={onBackPress}
-          forceNetworkId={forceNetworkId}
-          forceNetworkKind={forceNetworkKind}
-          forceNetworkFeatures={forceNetworkFeatures}
-        />
+        {process.env.isMini ? (
+          <HeaderMini title={mobileTitle || ""} />
+        ) : (
+          <HeaderMobile
+            onBackPress={onBackPress}
+            forceNetworkId={forceNetworkId}
+            forceNetworkKind={forceNetworkKind}
+            forceNetworkFeatures={forceNetworkFeatures}
+          />
+        )}
+
         {Platform.OS === "web" && <SidebarMobile />}
 
         {/*==== Scrollable screen content*/}
@@ -101,7 +105,9 @@ export const ScreenContainerMobile: FC<{
                   },
                 ]}
               >
-                {mobileTitle ? <MobileTitle title={mobileTitle} /> : null}
+                {mobileTitle && !process.env.isMini ? (
+                  <MobileTitle title={mobileTitle} />
+                ) : null}
                 <View style={[{ height: "100%" }]}>{children}</View>
               </ScrollView>
             ) : (
