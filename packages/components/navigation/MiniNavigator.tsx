@@ -4,6 +4,7 @@ import React from "react";
 
 import { TabBarIcon } from "./components/TabBarIcon";
 import { MiniChatScreen } from "../../screens/Mini/Chat/MiniChatScreen";
+import { MiniWalletScreen } from "../../screens/Mini/Wallet/MiniWalletScreen";
 import { RootStackParamList } from "../../utils/navigation";
 import { neutral00, secondaryColor } from "../../utils/style/colors";
 
@@ -34,7 +35,7 @@ const MainTab = () => {
       <Tab.Screen
         name="Wallets"
         options={{ header: () => null, title: "Wallets" }}
-        component={MiniChatScreen}
+        component={MiniWalletScreen}
       />
     </Tab.Navigator>
   );
