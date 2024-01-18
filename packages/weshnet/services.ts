@@ -16,6 +16,7 @@ import {
   setIsWeshConnected,
   setContactInfo,
   setPeerList,
+  selectContactInfo,
 } from "../store/slices/message";
 import { store } from "../store/store";
 import { isElectron } from "../utils/isElectron";
@@ -45,8 +46,11 @@ export const bootWeshModule = async () => {
     if (isElectron()) {
       weshClient.watchPort();
     } else {
+      const WeshnetModule = require("../../weshd");
+      const port = await WeshnetModule.getPort();
+      WeshnetModule.boot();
       setTimeout(() => {
-        weshClient.createClient(4242);
+        weshClient.createClient(port);
       }, 15 * 1000);
     }
   } catch (err) {
@@ -64,10 +68,19 @@ export const bootWeshnet = async () => {
       const resetRef = await weshClient.client.ContactRequestResetReference({});
       contactRef.publicRendezvousSeed = resetRef.publicRendezvousSeed;
     }
+    const publicRendezvousSeed = stringFromBytes(
+      contactRef.publicRendezvousSeed,
+    );
+    const contactInfo = selectContactInfo(store.getState());
+    const shareLink = createSharableLink({
+      ...contactInfo,
+      publicRendezvousSeed,
+    });
 
     store.dispatch(
       setContactInfo({
-        publicRendezvousSeed: stringFromBytes(contactRef.publicRendezvousSeed),
+        shareLink,
+        publicRendezvousSeed,
       }),
     );
 
