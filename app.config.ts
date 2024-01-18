@@ -2,9 +2,10 @@ import { ExpoConfig } from "expo/config";
 
 const config: { expo: ExpoConfig } = {
   expo: {
-    name: "teritori-dapp",
-    slug: "teritori-dapp",
+    name: "Teritori",
+    slug: "teritori",
     version: "1.0.0",
+    owner: "teritori",
     orientation: "portrait",
     icon: "./assets/icon.png",
     userInterfaceStyle: "light",
@@ -19,12 +20,14 @@ const config: { expo: ExpoConfig } = {
     assetBundlePatterns: ["**/*"],
     ios: {
       supportsTablet: true,
+      bundleIdentifier: "com.teritori",
     },
     android: {
       adaptiveIcon: {
         foregroundImage: "./assets/icon.png",
         backgroundColor: "#FFFFFF",
       },
+      package: "com.teritori",
     },
     web: {
       favicon: "./assets/favicon.png",
@@ -32,6 +35,9 @@ const config: { expo: ExpoConfig } = {
     },
     extra: {
       env: process.env,
+      eas: {
+        projectId: "9ce165de-0199-478c-b3bd-8688e5ce03eb",
+      },
     },
   },
 };
